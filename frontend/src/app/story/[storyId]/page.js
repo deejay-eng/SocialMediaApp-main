@@ -205,11 +205,11 @@ const Page = ({ params }) => {
             <Link href="/" className="flex items-center">
               <motion.img
                 whileHover={{ scale: 1.2, rotate: 10 }}
-                src="/images/rehman_logo.png"
+                src="/images/socio_logo.png"
                 alt="Logo"
                 className="w-10 mr-2"
               />
-              <span className="font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent text-xl">Rehman</span>
+              <span className="font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent text-xl">VybE</span>
             </Link>
           </div>
 
