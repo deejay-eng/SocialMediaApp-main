@@ -2,11 +2,11 @@
 
 Welcome to the **Social Networking Site** built using the **MERN Stack** (MongoDB, Express, React, Node.js). This project offers users the ability to connect with each other, share posts, like content, and more, similar to popular social networking platforms.
 
-![Website Screenshot](./frontend/public/images/screenshot.png)
+![Website Screenshot](<img width="1907" height="848" alt="image" src="https://github.com/user-attachments/assets/753df205-9c4a-4da4-a4e3-7f9aaf760696" />)
 
 ## 🚀 Live Demo
 
-Check out the live demo of the application [here](https://fb-mern.vercel.app/).
+Check out the live demo of the application [here](https://social-media-app-main-git-main-djs-projects-5304a308.vercel.app/).
 
 ## 📄 Description
 
