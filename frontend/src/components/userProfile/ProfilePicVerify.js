@@ -54,7 +54,7 @@ const ProfilePicVerify = () => {
         const uploadRes = await axios.put(
           `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update/avatar`,
           formData,
-          { headers: { 'auth-token': authToken, 'Content-Type': 'multipart/form-data' } }
+          { headers: { 'auth-token': authToken } }
         );
         const verifyRes = await axios.put(
           `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update`,
