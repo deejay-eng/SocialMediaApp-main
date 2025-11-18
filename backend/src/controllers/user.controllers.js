@@ -284,28 +284,59 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 
 // Update only profile picture via Cloudinary upload or URL
 export const updateUserAvatar = asyncHandler(async (req, res, next) => {
-  console.log("DEBUG req.file:", JSON.stringify(req.file, null, 2));
-console.log("DEBUG req.body:", JSON.stringify(req.body, null, 2));
-
-
-  const userId = req.user.id;
-  const user = await User.findById(userId);
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+  // === DEBUGGING START ===
+  if (!req.file) {
+    console.log("\n--- MULTER/UPLOAD DEBUG ---");
+    console.log("req.file is UNDEFINED or NULL!");
+    console.log("req.body:", JSON.stringify(req.body, null, 2));
+    console.log("Headers:", JSON.stringify(req.headers, null, 2));
+    console.log("---------------------------\n");
+  } else {
+    console.log("\n--- MULTER/UPLOAD DEBUG ---");
+    for (const k in req.file) {
+      console.log(`req.file.${k}:`, req.file[k]);
+    }
+    console.log("---------------------------\n");
   }
+  // === DEBUGGING END ===
 
-  const uploadedUrl = req.file?.path || req.file?.secure_url || null;
-  const urlFromBody = req.body?.profilePicture || null;
-  const finalUrl = uploadedUrl || urlFromBody;
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      console.log("\n--- DB DEBUG ---");
+      console.log("User not found for ID:", userId);
+      console.log("----------------\n");
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    const uploadedUrl = req.file?.path || req.file?.secure_url || null;
+    const urlFromBody = req.body?.profilePicture || null;
+    const finalUrl = uploadedUrl || urlFromBody;
+    
+    if (!finalUrl) {
+      console.log("\n--- CLOUDINARY/UPLOAD DEBUG ---");
+      console.log("No image URL found (neither file.path nor body.profilePicture)");
+      console.log("-------------------------------\n");
+      return next(new ApiError(400, 'No image provided'));
+    }
+    
+    user.profilePicture = finalUrl;
+    await user.save();
 
-  if (!finalUrl) {
-    return next(new ApiError(400, 'No image provided'));
+    console.log("\n--- SUCCESS DEBUG ---");
+    console.log("Final profile picture URL used:", finalUrl);
+    console.log("--- End of upload request ---\n");
+
+    return res.status(200).json(new ApiResponse(200, 'Profile picture updated successfully', user));
+  } catch (err) {
+    console.log("\n--- ERROR DEBUG ---");
+    console.log(err);
+    console.log("-------------------\n");
+    next(err);
   }
-
-  user.profilePicture = finalUrl;
-  await user.save();
-  return res.status(200).json(new ApiResponse(200, 'Profile picture updated successfully', user));
 });
+
 
 // Update only cover image via Cloudinary upload or URL
 export const updateUserCover = asyncHandler(async (req, res, next) => {
