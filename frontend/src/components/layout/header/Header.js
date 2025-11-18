@@ -80,7 +80,7 @@ const Header = ({ toggleSidebar }) => {
                   className="relative"
                 >
                   <img
-                    src="/images/rehman_logo.png"
+                    src="/images/socio_logo.png"
                     alt="Logo"
                     className="w-9 h-9 rounded-lg mr-2 z-10 relative drop-shadow-md"
                   />
@@ -97,7 +97,7 @@ const Header = ({ toggleSidebar }) => {
                     }}
                   />
                 </motion.div>
-                <span className="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-indigo-600 transition-all duration-500">Rehman</span>
+                <span className="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-indigo-600 transition-all duration-500">VybE</span>
               </div>
 
               <nav className="hidden lg:flex ml-3">
@@ -239,7 +239,7 @@ const Header = ({ toggleSidebar }) => {
                 <FiMenu className="w-5 h-5 text-gray-700" />
               </motion.button>
               <a
-                href={"https://github.com/rehmanNRY/SocialMediaApp/fork"}
+                href={"https://github.com/deejay-eng/SocialMediaApp-main"}
                 target='_blank'
                 className="p-2 rounded-full hover:bg-gray-100 transition-colors md:block hidden"
               >
