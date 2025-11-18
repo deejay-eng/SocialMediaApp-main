@@ -4,8 +4,8 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
-  title: "Social Networking Site - Abdul Rehman",
-  description: "Social networking site by Abdul Rehman in NextJs, MERN STACK",
+  title: "Social Networking Site - socio",
+  description: "Social networking site by Dhaani in NextJs, MERN STACK",
 };
 
 export default function RootLayout({ children }) {
