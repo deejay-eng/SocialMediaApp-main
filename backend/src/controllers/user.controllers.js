@@ -284,6 +284,9 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 
 // Update only profile picture via Cloudinary upload or URL
 export const updateUserAvatar = asyncHandler(async (req, res, next) => {
+  console.log('DEBUG req.file:', req.file);
+  console.log('DEBUG req.body:', req.body);
+
   const userId = req.user.id;
   const user = await User.findById(userId);
   if (!user) {
