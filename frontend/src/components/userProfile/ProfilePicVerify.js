@@ -1,3 +1,4 @@
+profilepicverify
 "use client"
 import React, { useState, useEffect, useRef } from 'react'
 import { IoImageOutline, IoImageSharp, IoCheckmarkCircle, IoLink, IoGrid } from 'react-icons/io5';
@@ -51,20 +52,16 @@ const ProfilePicVerify = () => {
         // Upload via Cloudinary (multer) then set verify flag
         const formData = new FormData();
         formData.append('profilePicture', newImageFile);
-        const uploadRes = await fetch("https://socialmediaapp-main.onrender.com/api/user/update/avatar", {
-    method: "PUT",
-    headers: {
-        "auth-token": localStorage.getItem("token")
-    },
-    body: formData
-});
-        const verifyRes = await fetch("https://socialmediaapp-main.onrender.com/api/user/update/avatar", {
-    method: "PUT",
-    headers: {
-        "auth-token": localStorage.getItem("token")
-    },
-    body: formData
-});
+        const uploadRes = await axios.put(
+          `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update/avatar`,
+          formData,
+          { headers: { 'auth-token': authToken } }
+        );
+        const verifyRes = await axios.put(
+          `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update`,
+          { isDpVerify: true },
+          { headers: { 'auth-token': authToken } }
+        );
         dispatch(updateUserDetails(verifyRes.data.data || uploadRes.data.data));
       } else {
         const response = await axios.put(
@@ -72,8 +69,8 @@ const ProfilePicVerify = () => {
           { profilePicture: currentPic, isDpVerify: true },
           {
             headers: {
-              "auth-token": authToken
-            }
+              "auth-token": authToken,
+            },
           }
         );
         dispatch(updateUserDetails(response.data.data));
