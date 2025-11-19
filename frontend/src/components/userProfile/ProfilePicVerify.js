@@ -1,4 +1,3 @@
-profilepicverify
 "use client"
 import React, { useState, useEffect, useRef } from 'react'
 import { IoImageOutline, IoImageSharp, IoCheckmarkCircle, IoLink, IoGrid } from 'react-icons/io5';
