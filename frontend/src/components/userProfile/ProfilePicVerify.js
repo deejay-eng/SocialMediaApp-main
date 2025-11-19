@@ -54,12 +54,12 @@ const ProfilePicVerify = () => {
         const uploadRes = await axios.put(
           `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update/avatar`,
           formData,
-          { headers: { 'auth-token': authToken, "Content-Type": "multipart/form-data" } }
+          { headers: { "auth-token": localStorage.getItem("token") }, body: formData }
         );
         const verifyRes = await axios.put(
           `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update`,
           { isDpVerify: true },
-          { headers: { 'auth-token': authToken, "Content-Type": "multipart/form-data" } }
+          { headers: { "auth-token": localStorage.getItem("token") }, body: formData }
         );
         dispatch(updateUserDetails(verifyRes.data.data || uploadRes.data.data));
       } else {
@@ -68,8 +68,8 @@ const ProfilePicVerify = () => {
           { profilePicture: currentPic, isDpVerify: true },
           {
             headers: {
-              "auth-token": authToken, "Content-Type": "multipart/form-data"
-            },
+              "auth-token": authToken
+            }
           }
         );
         dispatch(updateUserDetails(response.data.data));
