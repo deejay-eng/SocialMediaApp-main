@@ -284,25 +284,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 
 // Update only profile picture via Cloudinary upload or URL
 export const updateUserAvatar = asyncHandler(async (req, res, next) => {
-  // === DEBUGGING START ===
-  console.log("DEBUG: updateUserAvatar endpoint called!");
-
-  if (!req.file) {
-    console.log("\n--- MULTER/UPLOAD DEBUG ---");
-    console.log("req.file is UNDEFINED or NULL!");
-    console.log("req.body:", JSON.stringify(req.body, null, 2));
-    console.log("Headers:", JSON.stringify(req.headers, null, 2));
-    console.log("---------------------------\n");
-  } else {
-    console.log("\n--- MULTER/UPLOAD DEBUG ---");
-    for (const k in req.file) {
-      console.log(`req.file.${k}:`, req.file[k]);
-    }
-    console.log("---------------------------\n");
-  }
-  // === DEBUGGING END ===
-
-  try {
+    try {
     const userId = req.user.id;
     const user = await User.findById(userId);
     if (!user) {
