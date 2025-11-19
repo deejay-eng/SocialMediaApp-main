@@ -51,16 +51,20 @@ const ProfilePicVerify = () => {
         // Upload via Cloudinary (multer) then set verify flag
         const formData = new FormData();
         formData.append('profilePicture', newImageFile);
-        const uploadRes = await axios.put(
-          `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update/avatar`,
-          formData,
-          { headers: { "auth-token": localStorage.getItem("token") }, body: formData }
-        );
-        const verifyRes = await axios.put(
-          `${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/update`,
-          { isDpVerify: true },
-          { headers: { "auth-token": localStorage.getItem("token") }, body: formData }
-        );
+        const uploadRes = await fetch("https://socialmediaapp-main.onrender.com/api/user/update/avatar", {
+    method: "PUT",
+    headers: {
+        "auth-token": localStorage.getItem("token")
+    },
+    body: formData
+});
+        const verifyRes = await fetch("https://socialmediaapp-main.onrender.com/api/user/update/avatar", {
+    method: "PUT",
+    headers: {
+        "auth-token": localStorage.getItem("token")
+    },
+    body: formData
+});
         dispatch(updateUserDetails(verifyRes.data.data || uploadRes.data.data));
       } else {
         const response = await axios.put(
